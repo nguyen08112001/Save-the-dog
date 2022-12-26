@@ -1,4 +1,6 @@
-import { _decorator, Component, Node, TiledMap, instantiate, Prefab, RigidBody2D, BoxCollider2D, ERigidBody2DType, Size, Vec3, UITransform, TiledMapAsset, resources, native, AssetManager, assetManager } from 'cc';
+import { _decorator, Component, Node, TiledMap, instantiate, Prefab, RigidBody2D, BoxCollider2D, ERigidBody2DType, Size, Vec3, UITransform, TiledMapAsset, resources, native, AssetManager, assetManager, AnimationClip } from 'cc';
+import { LevelController } from './LevelController';
+import { GameFlow } from './GameFlow';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoadMap')
@@ -9,6 +11,8 @@ export class LoadMap extends Component {
     hivePrefab: Prefab
     @property(Prefab)
     obstaclePrefab: Prefab
+    @property(Node)
+    gameFlow: Node
 
     private tileMap: TiledMap
 
@@ -16,19 +20,31 @@ export class LoadMap extends Component {
     listDogs: Node[] = []
     listHives: Node[] = []
 
-    onLoad(): void {
+    __preload() {
         this.tileMap = this.node.getComponent(TiledMap)
-        this.renderMap()
+        this.loadMap()
     }
 
-    renderMap(): void {
+    private loadMap() {        
+        const levelString = this.gameFlow.getComponent(LevelController).getLevelName()
+        resources.load(`levels/${levelString}`, TiledMapAsset, (err, tileMap) => {
+            console.log("res load");
+            
+            this.tileMap.tmxAsset = tileMap
+            this.renderMap()
+            this.gameFlow.getComponent(GameFlow).initGame()
+        })
+    }
 
+    private renderMap(): void {
+        console.log("render");
+        
         const dogs = this.tileMap.getObjectGroup('Dog').getObjects()
         for (var i = 0; i < dogs.length; i++) {
             var { x, y } = dogs[i]
             this.generateDog(x, y)
         }
-        
+
         const hives = this.tileMap.getObjectGroup('Hive').getObjects()
         for (var i = 0; i < hives.length; i++) {
             var { x, y } = hives[i]

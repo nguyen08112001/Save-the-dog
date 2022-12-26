@@ -1,8 +1,8 @@
 import { _decorator, CCInteger, Component, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
-@ccclass('NewComponent')
-export class NewComponent extends Component {
+@ccclass('LevelController')
+export class LevelController extends Component {
     @property(CCInteger)
     private level: number = 1
 
@@ -18,12 +18,16 @@ export class NewComponent extends Component {
         
     }
 
-    levelUp() {
-        this.level++
+    setLevel(level: number) {
+        this.level = level
     }
 
     getLevel() {
         return this.level
+    }
+
+    getLevelName() {
+        return `Level0${this.level}`
     }
 }
 

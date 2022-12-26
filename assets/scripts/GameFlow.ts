@@ -3,6 +3,7 @@ import EventsName from './constants/EventsName';
 import GameState from './constants/gameState';
 import { Hive } from './Hive';
 import { TimerCountDown } from './TimerCountDown';
+import { LevelController } from './LevelController';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameFlow')
@@ -19,6 +20,10 @@ export class GameFlow extends Component {
     private state: GameState
 
     start() {
+
+    }
+
+    initGame() {
         this.map = this.node.parent.getChildByName("level")
 
         this.setState(GameState.READY)
