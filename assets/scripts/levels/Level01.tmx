@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="96" height="64" tilewidth="10" tileheight="10" infinite="0" parallaxoriginx="0" parallaxoriginy="1" nextlayerid="7" nextobjectid="13">
+ <objectgroup id="6" name="Bee"/>
+ <objectgroup id="3" name="Dog">
+  <object id="5" x="225.278" y="389.682"/>
+ </objectgroup>
+ <objectgroup id="5" name="Obstacles">
+  <object id="9" x="600" y="202" width="161" height="18"/>
+  <object id="10" x="316.731" y="268.871" width="140" height="21"/>
+ </objectgroup>
+ <objectgroup id="4" name="Hive">
+  <object id="6" x="790" y="88"/>
+ </objectgroup>
+</map>
